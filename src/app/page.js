@@ -1,4 +1,4 @@
-import ConnectButton from "./components/ConnectButton";
+import ConnectButton from './components/ConnectButton.tsx';
 
 export default function Home() {
   return (
