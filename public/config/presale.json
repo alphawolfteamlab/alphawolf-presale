@@ -1,0 +1,30 @@
+{
+  "tokenName": "Alpha Wolf",
+  "tokenSymbol": "AWF",
+  "contractAddress": "0x1A45845aC97B9A965703b7609A7CBC57b8134DcC",
+
+  "quoteAsset": "USDT",
+  "softCap": 10000,
+  "hardCap": 100000,
+
+  "tiers": [
+    {
+      "name": "1. Aşama",
+      "price": 0.10,
+      "bonusPct": 15,
+      "days": 7
+    },
+    {
+      "name": "2. Aşama",
+      "price": 0.15,
+      "bonusPct": 10,
+      "days": 7
+    },
+    {
+      "name": "3. Aşama",
+      "price": 0.20,
+      "bonusPct": 10,
+      "days": 7
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ALPHA WOLF PRESALE</title>
+  <style>
+    body{margin:0;background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
+    .wrap{max-width:900px;margin:60px auto;padding:0 20px;text-align:center}
+    h1{letter-spacing:.5px;font-size:42px;margin:0 0 6px}
+    p{opacity:.9;font-size:16px;margin:10px 0 18px}
+    .btn{background:#ffc400;color:#000;padding:14px 22px;border-radius:10px;font-size:18px;
+         font-weight:bold;cursor:pointer;border:none}
+    .grid{display:grid;gap:12px;margin-top:26px}
+    @media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+    .card{background:#0f0f12;border:1px solid #1e1e25;border-radius:12px;padding:16px;text-align:left}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+    small{opacity:.8}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>ALPHA WOLF PRESALE</h1>
+    <p>Toplam Arz: <b>21,000,000</b> — Ağ: <b>Avalanche C-Chain</b> — Ödeme: <b>USDT</b></p>
+
+    <button class="btn" id="connectBtn">Cüzdan Bağla</button>
+    <p id="acct" class="mono"></p>
+    <small class="mono">Presale/treasury cüzdanı: 0x71b66d7a771bc070794e2b0bd946277a746b1c65</small>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Token Dağılımı</h3>
+        <ul>
+          <li>%20 Presale</li>
+          <li>%20 Likidite (DEX)</li>
+          <li>%15 Ekosistem / Ödüller</li>
+          <li>%10 Ekip (vesting)</li>
+          <li>%10 Hazine</li>
+          <li>%10 CEX Listelemeleri</li>
+          <li>%10 Partnerlik / Pazarlama</li>
+          <li>%5 Airdrop</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Not</h3>
+        <p>“Satın Al” fonksiyonu test aşamasında. Bağlandıktan sonra ağın <b>Avalanche C-Chain</b> olduğundan emin olun.</p>
+        <button class="btn" id="buyBtn" disabled>Satın Al (yakında)</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const connectBtn = document.getElementById('connectBtn');
+    const acctEl = document.getElementById('acct');
+    const buyBtn = document.getElementById('buyBtn');
+
+    async function ensureAvalanche(){
+      const aval = { chainId: '0xa86a' }; // 43114
+      try { await window.ethereum.request({ method:'wallet_switchEthereumChain', params:[aval] }); }
+      catch (e) {
+        if (e.code === 4902) {
+          await window.ethereum.request({ method:'wallet_addEthereumChain', params:[{
+            chainId:'0xa86a', chainName:'Avalanche C-Chain',
+            nativeCurrency:{ name:'AVAX', symbol:'AVAX', decimals:18 },
+            rpcUrls:['https://api.avax.network/ext/bc/C/rpc'],
+            blockExplorerUrls:['https://snowtrace.io/']
+          }]});
+        } else { throw e; }
+      }
+    }
+
+    async function connect(){
+      if(!window.ethereum){ alert('Metamask veya uyumlu cüzdan yükleyin.'); return; }
+      const [account] = await window.ethereum.request({ method:'eth_requestAccounts' });
+      await ensureAvalanche();
+      acctEl.textContent = Bağlı: ${account};
+      buyBtn.disabled = true; // gerçek satın alma entegrasyonu eklenince kaldırılacak
+    }
+
+    connectBtn.addEventListener('click', connect);
+  </script>
+</body>
+</html>
