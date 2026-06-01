@@ -17,8 +17,8 @@ const navItems = [
 export default function Header({ active = "home" }: HeaderProps) {
   return (
     <header className="relative z-30 h-[78px] border-b border-lime-400/25 bg-black/95 font-mono">
-      <div className="mx-auto flex h-full max-w-[1760px] items-center justify-between px-6">
-        <Link href="/" className="flex shrink-0 items-center gap-3">
+      <div className="mx-auto grid h-full max-w-[1760px] grid-cols-[260px_1fr_210px] items-center px-6">
+        <Link href="/" className="flex items-center gap-3">
           <img
             src="/wolf-logo.png"
             alt="Alpha Wolf"
@@ -29,7 +29,7 @@ export default function Header({ active = "home" }: HeaderProps) {
           </span>
         </Link>
 
-        <nav className="flex flex-1 items-center justify-end gap-8 px-8 text-[15px] font-black text-white">
+        <nav className="flex items-center justify-center gap-8 text-[15px] font-black text-white">
           {navItems.map((item) => (
             <Link
               key={item.key}
@@ -48,7 +48,7 @@ export default function Header({ active = "home" }: HeaderProps) {
 
         <Link
           href="/#presale"
-          className="shrink-0 rounded-md bg-lime-400 px-6 py-2.5 text-[14px] font-black text-black shadow-[0_0_24px_rgba(132,255,0,.45)] transition hover:bg-lime-300"
+          className="justify-self-end whitespace-nowrap rounded-md bg-lime-400 px-6 py-2.5 text-[14px] font-black text-black shadow-[0_0_24px_rgba(132,255,0,.45)] transition hover:bg-lime-300"
         >
           CONNECT WALLET
         </Link>
