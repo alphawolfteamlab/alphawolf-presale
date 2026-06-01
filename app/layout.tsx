@@ -17,11 +17,7 @@ export const metadata: Metadata = {
   title: "Alpha Wolf Token",
   description: "GPU-powered crypto ecosystem",
   icons: {
-    icon: [
-      { url: "/icon.png", type: "image/png", sizes: "512x512" },
-    ],
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: "/favicon.ico",
   },
 };
 
