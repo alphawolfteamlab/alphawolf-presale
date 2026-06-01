@@ -16,11 +16,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Alpha Wolf Token",
   description: "GPU-powered crypto ecosystem",
-  icons: {
-    icon: "/wolf.png",
-    shortcut: "/wolf.png",
-    apple: "/wolf.png",
-  },
 };
 
 export default function RootLayout({
@@ -33,6 +28,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="icon" href="/wolf.png?v=7" type="image/png" />
+        <link rel="shortcut icon" href="/wolf.png?v=7" type="image/png" />
+        <link rel="apple-touch-icon" href="/wolf.png?v=7" />
+      </head>
+
       <body className="min-h-full flex flex-col">
         <Providers>{children}</Providers>
       </body>
