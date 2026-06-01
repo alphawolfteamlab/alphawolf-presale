@@ -63,14 +63,9 @@ export default function Home() {
     },
   });
 
-  const soldAwf = totalSoldData
-    ? Number(formatUnits(totalSoldData, 18))
-    : 0;
+  const soldAwf = totalSoldData ? Number(formatUnits(totalSoldData, 18)) : 0;
 
-  const soldPercent = Math.min(
-    100,
-    (soldAwf / TOTAL_PRESALE_AWF) * 100
-  );
+  const soldPercent = Math.min(100, (soldAwf / TOTAL_PRESALE_AWF) * 100);
 
   const awfAmount = Number(amount || 0) * 10;
 
@@ -195,9 +190,9 @@ export default function Home() {
           </div>
         </div>
 
-        <aside className="rounded-3xl border border-lime-400/30 bg-black/75 p-4 shadow-[0_0_45px_rgba(132,255,0,.13)]">
+        <aside className="rounded-3xl border border-lime-400/30 bg-black/75 p-3 shadow-[0_0_45px_rgba(132,255,0,.13)]">
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-[30px] font-black leading-none text-lime-400 md:text-[34px]">
+            <h2 className="text-[29px] font-black leading-none text-lime-400 md:text-[32px]">
               AWF PRESALE
             </h2>
 
@@ -206,11 +201,11 @@ export default function Home() {
             </span>
           </div>
 
-          <div className="mt-3 grid grid-cols-3 gap-2">
+          <div className="mt-2 grid grid-cols-3 gap-2">
             {presaleStages.map(([stage, stageAmount, price]) => (
               <div
                 key={stage}
-                className="rounded-xl border border-lime-400/20 bg-lime-400/5 p-3"
+                className="rounded-xl border border-lime-400/20 bg-lime-400/5 p-2.5"
               >
                 <div className="text-[10px] font-black text-lime-400">
                   {stage}
@@ -218,20 +213,20 @@ export default function Home() {
                 <div className="mt-1 text-[9px] text-gray-300">
                   {stageAmount}
                 </div>
-                <div className="mt-2 text-base font-black text-white">
+                <div className="mt-1.5 text-base font-black text-white">
                   {price}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-3 rounded-xl border border-lime-400/20 bg-lime-400/5 px-4 py-2 text-center">
+          <div className="mt-2 rounded-xl border border-lime-400/20 bg-lime-400/5 px-4 py-2 text-center">
             <span className="text-xs font-black text-lime-400">
               STAGE 1 ENDS WHEN 10,000,000 AWF IS SOLD
             </span>
           </div>
 
-          <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-zinc-800">
+          <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-zinc-800">
             <div
               className="h-full bg-lime-400 shadow-[0_0_16px_rgba(132,255,0,.8)]"
               style={{ width: `${soldPercent}%` }}
@@ -241,23 +236,25 @@ export default function Home() {
           <div className="mt-2 flex justify-between text-sm font-black">
             <span>
               <span className="text-lime-400">
-                SOLD: {soldAwf.toLocaleString(undefined, { maximumFractionDigits: 0 })} AWF
+                SOLD:{" "}
+                {soldAwf.toLocaleString(undefined, {
+                  maximumFractionDigits: 0,
+                })}{" "}
+                AWF
               </span>{" "}
               <span className="text-white">
                 / {TOTAL_PRESALE_AWF.toLocaleString()} AWF
               </span>
             </span>
 
-            <span className="text-lime-400">
-              {soldPercent.toFixed(2)}%
-            </span>
+            <span className="text-lime-400">{soldPercent.toFixed(2)}%</span>
           </div>
 
-          <div className="mt-3 rounded-xl border border-lime-400/20 bg-black/50 p-3">
+          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/50 p-2.5">
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-lg font-black">1 AWF</div>
-                <div className="mt-1 text-xs text-gray-300">
+                <div className="mt-0.5 text-xs text-gray-300">
                   NEXT STAGE: <span className="text-white">$0.15</span>
                 </div>
               </div>
@@ -266,7 +263,7 @@ export default function Home() {
             </div>
           </div>
 
-          <p className="mt-3 text-sm text-gray-300">PAY WITH</p>
+          <p className="mt-2 text-sm text-gray-300">PAY WITH</p>
 
           <div className="mt-2 grid grid-cols-2 gap-3">
             {payments.map(([label, icon]) => (
@@ -274,19 +271,19 @@ export default function Home() {
                 key={label}
                 onClick={() => setPayToken(label as "USDT" | "USDC")}
                 type="button"
-                className={`flex items-center justify-center gap-2 rounded-xl border py-3 font-black ${
+                className={`flex items-center justify-center gap-2 rounded-xl border py-2.5 font-black ${
                   payToken === label
                     ? "border-lime-400 bg-lime-400/15 text-lime-400"
                     : "border-white/10 bg-zinc-900 hover:border-lime-400/70"
                 }`}
               >
-                <img src={icon} alt={label} className="h-7 w-7 object-contain" />
+                <img src={icon} alt={label} className="h-6 w-6 object-contain" />
                 <span>{label}</span>
               </button>
             ))}
           </div>
 
-          <div className="mt-3 rounded-xl border border-lime-400/20 bg-black/45 p-3">
+          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/45 p-2.5">
             <div className="flex items-center gap-3">
               <div className="flex-1">
                 <label className="text-[10px] font-black text-gray-300">
@@ -299,16 +296,16 @@ export default function Home() {
                   type="number"
                   min="0"
                   placeholder="1"
-                  className="mt-1 w-full rounded-xl border border-lime-400/20 bg-black px-4 py-2 text-lg font-black text-white outline-none focus:border-lime-400"
+                  className="mt-1 w-full rounded-xl border border-lime-400/20 bg-black px-4 py-1.5 text-lg font-black text-white outline-none focus:border-lime-400"
                 />
               </div>
 
-              <div className="w-[155px] rounded-xl border border-lime-400/15 bg-lime-400/5 px-3 py-3">
+              <div className="w-[155px] rounded-xl border border-lime-400/15 bg-lime-400/5 px-3 py-2.5">
                 <div className="text-[10px] font-black text-gray-300">
                   RECEIVE
                 </div>
 
-                <div className="mt-2 text-lg font-black text-lime-400">
+                <div className="mt-1.5 text-lg font-black text-lime-400">
                   {Number.isFinite(awfAmount)
                     ? awfAmount.toLocaleString()
                     : "0"}{" "}
@@ -318,7 +315,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-3">
+          <div className="mt-2">
             <ConnectButton.Custom>
               {({ openConnectModal, openChainModal, account, chain, mounted }) => {
                 const ready = mounted;
@@ -338,7 +335,7 @@ export default function Home() {
                       }
                     }}
                     type="button"
-                    className="w-full rounded-xl bg-lime-400 py-2.5 text-base font-black text-black shadow-[0_0_24px_rgba(132,255,0,.45)]"
+                    className="w-full rounded-xl bg-lime-400 py-2 text-base font-black text-black shadow-[0_0_24px_rgba(132,255,0,.45)]"
                   >
                     {!connected
                       ? "CONNECT WALLET"
@@ -355,7 +352,7 @@ export default function Home() {
             onClick={buyAWF}
             disabled={isPending}
             type="button"
-            className="mt-2 w-full rounded-xl border border-lime-400/70 bg-lime-400/10 py-2.5 text-base font-black text-lime-400 hover:bg-lime-400 hover:text-black disabled:opacity-50"
+            className="mt-2 w-full rounded-xl border border-lime-400/70 bg-lime-400/10 py-2 text-base font-black text-lime-400 hover:bg-lime-400 hover:text-black disabled:opacity-50"
           >
             {isPending ? "PROCESSING..." : "BUY AWF"}
           </button>
