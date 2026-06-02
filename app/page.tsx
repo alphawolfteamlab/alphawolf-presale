@@ -76,7 +76,6 @@ export default function Home() {
   });
 
   const soldAwf = totalSoldData ? Number(formatUnits(totalSoldData, 18)) : 0;
-
   const soldPercent = Math.min(100, (soldAwf / TOTAL_PRESALE_AWF) * 100);
 
   const awfAmount = Number(amount || 0) * 10;
@@ -86,6 +85,11 @@ export default function Home() {
     : 0;
 
   const awfValue = awfBalance * 0.1;
+
+  const compactAwfBalance =
+    awfBalance >= 1_000_000
+      ? `${(awfBalance / 1_000_000).toFixed(2)}M`
+      : awfBalance.toLocaleString(undefined, { maximumFractionDigits: 0 });
 
   async function buyAWF() {
     if (!isConnected) {
@@ -244,73 +248,71 @@ export default function Home() {
             </span>
           </div>
 
-          <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-zinc-800">
-            <div
-              className="h-full bg-lime-400 shadow-[0_0_16px_rgba(132,255,0,.8)]"
-              style={{ width: `${soldPercent}%` }}
-            />
-          </div>
-
-          <div className="mt-2 flex justify-between text-sm font-black">
-            <span>
-              <span className="text-lime-400">
-                SOLD:{" "}
-                {soldAwf.toLocaleString(undefined, {
-                  maximumFractionDigits: 0,
-                })}{" "}
-                AWF
-              </span>{" "}
-              <span className="text-white">
-                / {TOTAL_PRESALE_AWF.toLocaleString()} AWF
+          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/45 px-4 py-2.5">
+            <div className="flex justify-between text-sm font-black">
+              <span>
+                <span className="text-lime-400">
+                  SOLD:{" "}
+                  {soldAwf.toLocaleString(undefined, {
+                    maximumFractionDigits: 0,
+                  })}{" "}
+                  AWF
+                </span>{" "}
+                <span className="text-white">
+                  / {TOTAL_PRESALE_AWF.toLocaleString()} AWF
+                </span>
               </span>
-            </span>
 
-            <span className="text-lime-400">{soldPercent.toFixed(2)}%</span>
+              <span className="text-lime-400">{soldPercent.toFixed(2)}%</span>
+            </div>
+
+            <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-zinc-800">
+              <div
+                className="h-full bg-lime-400 shadow-[0_0_16px_rgba(132,255,0,.8)]"
+                style={{ width: `${soldPercent}%` }}
+              />
+            </div>
           </div>
 
-          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/50 p-2.5">
+          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/50 p-3">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-lg font-black">1 AWF</div>
-                <div className="mt-0.5 text-xs text-gray-300">
+                <div className="text-2xl font-black">1 AWF</div>
+                <div className="mt-0.5 text-sm text-gray-300">
                   NEXT STAGE: <span className="text-white">$0.15</span>
                 </div>
               </div>
 
-              <div className="text-2xl font-black text-lime-400">$0.10</div>
+              <div className="text-4xl font-black text-lime-400">$0.10</div>
             </div>
           </div>
 
           {isConnected && (
-  <div className="mt-2 rounded-xl border border-lime-400/20 bg-lime-400/5 px-3 py-2">
-    <div className="flex items-center justify-between">
-      <div>
-        <div className="text-[10px] font-black text-gray-400">
-          YOUR AWF BALANCE
-        </div>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              <div className="rounded-xl border border-lime-400/20 bg-lime-400/5 p-3">
+                <div className="text-[10px] font-black text-gray-400">
+                  YOUR AWF BALANCE
+                </div>
 
-        <div className="text-lg font-black text-lime-400">
-          {awfBalance.toLocaleString(undefined, {
-            maximumFractionDigits: 0,
-          })} AWF
-        </div>
-      </div>
+                <div className="mt-1 text-2xl font-black text-lime-400">
+                  {compactAwfBalance} AWF
+                </div>
+              </div>
 
-      <div className="text-right">
-        <div className="text-[10px] font-black text-gray-400">
-          VALUE
-        </div>
+              <div className="rounded-xl border border-lime-400/20 bg-lime-400/5 p-3">
+                <div className="text-[10px] font-black text-gray-400">
+                  ESTIMATED VALUE
+                </div>
 
-        <div className="text-sm font-black text-white">
-          $
-          {awfValue.toLocaleString(undefined, {
-            maximumFractionDigits: 0,
-          })}
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+                <div className="mt-1 text-2xl font-black text-white">
+                  $
+                  {awfValue.toLocaleString(undefined, {
+                    maximumFractionDigits: 0,
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
 
           <p className="mt-2 text-sm text-gray-300">PAY WITH</p>
 
@@ -332,34 +334,30 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/45 p-2.5">
-            <div className="flex items-center gap-3">
-              <div className="flex-1">
-                <label className="text-[10px] font-black text-gray-300">
-                  AMOUNT ({payToken})
-                </label>
+          <div className="mt-2 grid grid-cols-[1fr_.72fr] gap-3">
+            <div className="rounded-xl border border-lime-400/20 bg-black/45 p-2.5">
+              <label className="text-[10px] font-black text-gray-300">
+                AMOUNT ({payToken})
+              </label>
 
-                <input
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  type="number"
-                  min="0"
-                  placeholder="1"
-                  className="mt-1 w-full rounded-xl border border-lime-400/20 bg-black px-4 py-1.5 text-lg font-black text-white outline-none focus:border-lime-400"
-                />
+              <input
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                type="number"
+                min="0"
+                placeholder="1"
+                className="mt-1 w-full rounded-xl border border-lime-400/20 bg-black px-4 py-1.5 text-lg font-black text-white outline-none focus:border-lime-400"
+              />
+            </div>
+
+            <div className="rounded-xl border border-lime-400/15 bg-lime-400/5 px-3 py-2.5">
+              <div className="text-[10px] font-black text-gray-300">
+                RECEIVE
               </div>
 
-              <div className="w-[155px] rounded-xl border border-lime-400/15 bg-lime-400/5 px-3 py-2.5">
-                <div className="text-[10px] font-black text-gray-300">
-                  RECEIVE
-                </div>
-
-                <div className="mt-1.5 text-lg font-black text-lime-400">
-                  {Number.isFinite(awfAmount)
-                    ? awfAmount.toLocaleString()
-                    : "0"}{" "}
-                  AWF
-                </div>
+              <div className="mt-1.5 text-lg font-black text-lime-400">
+                {Number.isFinite(awfAmount) ? awfAmount.toLocaleString() : "0"}{" "}
+                AWF
               </div>
             </div>
           </div>
