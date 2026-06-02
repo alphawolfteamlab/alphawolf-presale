@@ -18,6 +18,7 @@ const presaleStages = [
 ];
 
 const PRESALE_ADDRESS = "0x6575bDd46c2F86c678573dED003516c13A282D24";
+const AWF_ADDRESS = "BURAYA_AWF_TOKEN_KONTRAT_ADRESI";
 const USDT_ADDRESS = "0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7";
 const USDC_ADDRESS = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E";
 
@@ -48,7 +49,7 @@ const PRESALE_ABI = [
 ] as const;
 
 export default function Home() {
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const { writeContractAsync, isPending } = useWriteContract();
 
   const [payToken, setPayToken] = useState<"USDT" | "USDC">("USDT");
@@ -63,11 +64,28 @@ export default function Home() {
     },
   });
 
+  const { data: awfBalanceData } = useReadContract({
+    address: AWF_ADDRESS,
+    abi: erc20Abi,
+    functionName: "balanceOf",
+    args: address ? [address] : undefined,
+    query: {
+      enabled: Boolean(address),
+      refetchInterval: 8000,
+    },
+  });
+
   const soldAwf = totalSoldData ? Number(formatUnits(totalSoldData, 18)) : 0;
 
   const soldPercent = Math.min(100, (soldAwf / TOTAL_PRESALE_AWF) * 100);
 
   const awfAmount = Number(amount || 0) * 10;
+
+  const awfBalance = awfBalanceData
+    ? Number(formatUnits(awfBalanceData, 18))
+    : 0;
+
+  const awfValue = awfBalance * 0.1;
 
   async function buyAWF() {
     if (!isConnected) {
@@ -262,6 +280,28 @@ export default function Home() {
               <div className="text-2xl font-black text-lime-400">$0.10</div>
             </div>
           </div>
+
+          {isConnected && (
+            <div className="mt-2 rounded-xl border border-lime-400/20 bg-lime-400/5 p-3">
+              <div className="text-xs font-black text-gray-400">
+                YOUR AWF BALANCE
+              </div>
+
+              <div className="mt-1 text-2xl font-black text-lime-400">
+                {awfBalance.toLocaleString(undefined, {
+                  maximumFractionDigits: 2,
+                })}{" "}
+                AWF
+              </div>
+
+              <div className="mt-1 text-sm text-gray-300">
+                Estimated Value: $
+                {awfValue.toLocaleString(undefined, {
+                  maximumFractionDigits: 2,
+                })}
+              </div>
+            </div>
+          )}
 
           <p className="mt-2 text-sm text-gray-300">PAY WITH</p>
 
