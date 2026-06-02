@@ -10,20 +10,20 @@ export default function StakingPage() {
     <div className="min-h-screen bg-[#020400] text-white">
       <Header active="staking" />
 
-      <main className="relative min-h-[calc(100vh-78px)] overflow-hidden bg-[#020400]">
-        <section className="relative mx-auto max-w-[1300px] px-5 py-10">
+      <main className="relative min-h-[calc(100vh-78px)] overflow-x-hidden bg-[#020400]">
+        <section className="relative mx-auto max-w-[1720px] px-4 py-6 md:px-6">
           <div className="relative overflow-hidden rounded-[34px] border border-lime-400/25 bg-black shadow-[0_0_80px_rgba(132,255,0,.12)]">
             <img
-              src="/staking-bg.png"
+              src="/staking-bg-hq.png"
               alt="Alpha Wolf Staking"
-              className="w-full object-contain"
+              className="block h-auto w-full object-contain"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/30" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/20" />
 
             <button
               onClick={() => setOpen(true)}
-              className="absolute bottom-[22.5%] right-[8.5%] z-20 h-[72px] w-[27%] rounded-2xl bg-lime-400 text-black text-xl font-black tracking-wide shadow-[0_0_35px_rgba(132,255,0,.55)] transition hover:scale-[1.02]"
+              className="absolute bottom-[29%] right-[9%] z-20 h-[7%] w-[25%] rounded-2xl bg-lime-400 text-[1.2vw] font-black tracking-wide text-black shadow-[0_0_35px_rgba(132,255,0,.55)] transition hover:scale-[1.02]"
             >
               CONNECT WALLET
             </button>
@@ -40,10 +40,6 @@ export default function StakingPage() {
                 ×
               </button>
 
-              <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full border border-lime-400/50 bg-lime-400/10 text-4xl shadow-[0_0_35px_rgba(132,255,0,.35)]">
-                🐺
-              </div>
-
               <h2 className="text-4xl font-black text-lime-400">
                 STAKING COMING SOON
               </h2>
@@ -53,22 +49,9 @@ export default function StakingPage() {
                 smart contract deployment and security audit.
               </p>
 
-              <div className="mt-6 rounded-2xl border border-lime-400/25 bg-black/50 p-5 text-left">
-                <p className="text-sm font-black tracking-[0.25em] text-lime-400">
-                  NEXT STEPS
-                </p>
-
-                <ul className="mt-4 space-y-3 text-sm text-white/75">
-                  <li>• Presale completion</li>
-                  <li>• AWF token launch</li>
-                  <li>• Staking contract audit</li>
-                  <li>• Reward pool activation</li>
-                </ul>
-              </div>
-
               <button
                 onClick={() => setOpen(false)}
-                className="mt-7 w-full rounded-2xl bg-lime-400 py-4 text-lg font-black text-black shadow-[0_0_35px_rgba(132,255,0,.45)] transition hover:scale-[1.02]"
+                className="mt-7 w-full rounded-2xl bg-lime-400 py-4 text-lg font-black text-black"
               >
                 GOT IT
               </button>
