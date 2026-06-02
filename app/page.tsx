@@ -214,7 +214,7 @@ export default function Home() {
 
         <aside className="rounded-3xl border border-lime-400/30 bg-black/75 p-3 shadow-[0_0_45px_rgba(132,255,0,.13)]">
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-[29px] font-black leading-none text-lime-400 md:text-[32px]">
+            <h2 className="text-[28px] font-black leading-none text-lime-400 md:text-[30px]">
               AWF PRESALE
             </h2>
 
@@ -227,29 +227,29 @@ export default function Home() {
             {presaleStages.map(([stage, stageAmount, price]) => (
               <div
                 key={stage}
-                className="rounded-xl border border-lime-400/20 bg-lime-400/5 p-2.5"
+                className="rounded-xl border border-lime-400/20 bg-lime-400/5 px-3 py-2"
               >
                 <div className="text-[10px] font-black text-lime-400">
                   {stage}
                 </div>
-                <div className="mt-1 text-[9px] text-gray-300">
+                <div className="mt-0.5 text-[8px] text-gray-300">
                   {stageAmount}
                 </div>
-                <div className="mt-1.5 text-base font-black text-white">
+                <div className="mt-1 text-sm font-black text-white">
                   {price}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-2 rounded-xl border border-lime-400/20 bg-lime-400/5 px-4 py-2 text-center">
-            <span className="text-xs font-black text-lime-400">
+          <div className="mt-2 rounded-xl border border-lime-400/20 bg-lime-400/5 px-4 py-1.5 text-center">
+            <span className="text-[11px] font-black text-lime-400">
               STAGE 1 ENDS WHEN 10,000,000 AWF IS SOLD
             </span>
           </div>
 
-          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/45 px-4 py-2.5">
-            <div className="flex justify-between text-sm font-black">
+          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/45 px-3 py-2">
+            <div className="flex justify-between text-[13px] font-black">
               <span>
                 <span className="text-lime-400">
                   SOLD:{" "}
@@ -266,7 +266,7 @@ export default function Home() {
               <span className="text-lime-400">{soldPercent.toFixed(2)}%</span>
             </div>
 
-            <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-zinc-800">
+            <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-zinc-800">
               <div
                 className="h-full bg-lime-400 shadow-[0_0_16px_rgba(132,255,0,.8)]"
                 style={{ width: `${soldPercent}%` }}
@@ -274,37 +274,39 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/50 p-3">
+          <div className="mt-2 rounded-xl border border-lime-400/20 bg-black/50 px-3 py-2">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-black">1 AWF</div>
-                <div className="mt-0.5 text-sm text-gray-300">
+                <div className="text-xl font-black leading-none">1 AWF</div>
+                <div className="mt-1 text-xs text-gray-300">
                   NEXT STAGE: <span className="text-white">$0.15</span>
                 </div>
               </div>
 
-              <div className="text-4xl font-black text-lime-400">$0.10</div>
+              <div className="text-3xl font-black leading-none text-lime-400">
+                $0.10
+              </div>
             </div>
           </div>
 
           {isConnected && (
             <div className="mt-2 grid grid-cols-2 gap-2">
-              <div className="rounded-xl border border-lime-400/20 bg-lime-400/5 p-3">
-                <div className="text-[10px] font-black text-gray-400">
+              <div className="rounded-xl border border-lime-400/20 bg-lime-400/5 px-3 py-2">
+                <div className="text-[9px] font-black text-gray-400">
                   YOUR AWF BALANCE
                 </div>
 
-                <div className="mt-1 text-2xl font-black text-lime-400">
+                <div className="mt-1 text-xl font-black leading-none text-lime-400">
                   {compactAwfBalance} AWF
                 </div>
               </div>
 
-              <div className="rounded-xl border border-lime-400/20 bg-lime-400/5 p-3">
-                <div className="text-[10px] font-black text-gray-400">
+              <div className="rounded-xl border border-lime-400/20 bg-lime-400/5 px-3 py-2">
+                <div className="text-[9px] font-black text-gray-400">
                   ESTIMATED VALUE
                 </div>
 
-                <div className="mt-1 text-2xl font-black text-white">
+                <div className="mt-1 text-xl font-black leading-none text-white">
                   $
                   {awfValue.toLocaleString(undefined, {
                     maximumFractionDigits: 0,
@@ -314,29 +316,29 @@ export default function Home() {
             </div>
           )}
 
-          <p className="mt-2 text-sm text-gray-300">PAY WITH</p>
+          <p className="mt-2 text-xs text-gray-300">PAY WITH</p>
 
-          <div className="mt-2 grid grid-cols-2 gap-3">
+          <div className="mt-1.5 grid grid-cols-2 gap-2">
             {payments.map(([label, icon]) => (
               <button
                 key={label}
                 onClick={() => setPayToken(label as "USDT" | "USDC")}
                 type="button"
-                className={`flex items-center justify-center gap-2 rounded-xl border py-2.5 font-black ${
+                className={`flex items-center justify-center gap-2 rounded-xl border py-2 text-sm font-black ${
                   payToken === label
                     ? "border-lime-400 bg-lime-400/15 text-lime-400"
                     : "border-white/10 bg-zinc-900 hover:border-lime-400/70"
                 }`}
               >
-                <img src={icon} alt={label} className="h-6 w-6 object-contain" />
+                <img src={icon} alt={label} className="h-5 w-5 object-contain" />
                 <span>{label}</span>
               </button>
             ))}
           </div>
 
-          <div className="mt-2 grid grid-cols-[1fr_.72fr] gap-3">
-            <div className="rounded-xl border border-lime-400/20 bg-black/45 p-2.5">
-              <label className="text-[10px] font-black text-gray-300">
+          <div className="mt-2 grid grid-cols-[1fr_.62fr] gap-2">
+            <div className="rounded-xl border border-lime-400/20 bg-black/45 px-3 py-2">
+              <label className="text-[9px] font-black text-gray-300">
                 AMOUNT ({payToken})
               </label>
 
@@ -346,16 +348,16 @@ export default function Home() {
                 type="number"
                 min="0"
                 placeholder="1"
-                className="mt-1 w-full rounded-xl border border-lime-400/20 bg-black px-4 py-1.5 text-lg font-black text-white outline-none focus:border-lime-400"
+                className="mt-1 w-full rounded-lg border border-lime-400/20 bg-black px-3 py-1 text-base font-black text-white outline-none focus:border-lime-400"
               />
             </div>
 
-            <div className="rounded-xl border border-lime-400/15 bg-lime-400/5 px-3 py-2.5">
-              <div className="text-[10px] font-black text-gray-300">
+            <div className="rounded-xl border border-lime-400/15 bg-lime-400/5 px-3 py-2">
+              <div className="text-[9px] font-black text-gray-300">
                 RECEIVE
               </div>
 
-              <div className="mt-1.5 text-lg font-black text-lime-400">
+              <div className="mt-2 text-lg font-black leading-none text-lime-400">
                 {Number.isFinite(awfAmount) ? awfAmount.toLocaleString() : "0"}{" "}
                 AWF
               </div>
@@ -382,7 +384,7 @@ export default function Home() {
                       }
                     }}
                     type="button"
-                    className="w-full rounded-xl bg-lime-400 py-2 text-base font-black text-black shadow-[0_0_24px_rgba(132,255,0,.45)]"
+                    className="w-full rounded-xl bg-lime-400 py-2 text-sm font-black text-black shadow-[0_0_24px_rgba(132,255,0,.45)]"
                   >
                     {!connected
                       ? "CONNECT WALLET"
@@ -399,7 +401,7 @@ export default function Home() {
             onClick={buyAWF}
             disabled={isPending}
             type="button"
-            className="mt-2 w-full rounded-xl border border-lime-400/70 bg-lime-400/10 py-2 text-base font-black text-lime-400 hover:bg-lime-400 hover:text-black disabled:opacity-50"
+            className="mt-2 w-full rounded-xl border border-lime-400/70 bg-lime-400/10 py-2 text-sm font-black text-lime-400 hover:bg-lime-400 hover:text-black disabled:opacity-50"
           >
             {isPending ? "PROCESSING..." : "BUY AWF"}
           </button>
