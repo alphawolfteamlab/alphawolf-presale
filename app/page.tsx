@@ -282,26 +282,35 @@ export default function Home() {
           </div>
 
           {isConnected && (
-            <div className="mt-2 rounded-xl border border-lime-400/20 bg-lime-400/5 p-3">
-              <div className="text-xs font-black text-gray-400">
-                YOUR AWF BALANCE
-              </div>
+  <div className="mt-2 rounded-xl border border-lime-400/20 bg-lime-400/5 px-3 py-2">
+    <div className="flex items-center justify-between">
+      <div>
+        <div className="text-[10px] font-black text-gray-400">
+          YOUR AWF BALANCE
+        </div>
 
-              <div className="mt-1 text-2xl font-black text-lime-400">
-                {awfBalance.toLocaleString(undefined, {
-                  maximumFractionDigits: 2,
-                })}{" "}
-                AWF
-              </div>
+        <div className="text-lg font-black text-lime-400">
+          {awfBalance.toLocaleString(undefined, {
+            maximumFractionDigits: 0,
+          })} AWF
+        </div>
+      </div>
 
-              <div className="mt-1 text-sm text-gray-300">
-                Estimated Value: $
-                {awfValue.toLocaleString(undefined, {
-                  maximumFractionDigits: 2,
-                })}
-              </div>
-            </div>
-          )}
+      <div className="text-right">
+        <div className="text-[10px] font-black text-gray-400">
+          VALUE
+        </div>
+
+        <div className="text-sm font-black text-white">
+          $
+          {awfValue.toLocaleString(undefined, {
+            maximumFractionDigits: 0,
+          })}
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
           <p className="mt-2 text-sm text-gray-300">PAY WITH</p>
 
